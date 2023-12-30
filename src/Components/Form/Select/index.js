@@ -1,13 +1,6 @@
 import "./Select.css";
 
-export const Select = ({
-  label,
-  itens,
-  onChange,
-  required,
-  value,
-  onChanged,
-}) => {
+export const Select = ({ label, itens, required, value, onChanged }) => {
   return (
     <div className="select">
       <label>{label}</label>
@@ -16,6 +9,7 @@ export const Select = ({
         required={required}
         value={value}
       >
+        <option value=""></option>
         {itens.map(item => {
           return <option key={item}>{item}</option>;
         })}

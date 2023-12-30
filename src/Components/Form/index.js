@@ -4,25 +4,19 @@ import "./Form.css";
 import { Inputs } from "./Inputs";
 import { Select } from "./Select";
 
-export const Form = () => {
-  const times = [
-    "Programação",
-    "Front-End",
-    "Data Science",
-    "Devops",
-    "UX e Design",
-    "Mobile",
-    "Inovação e Gestão",
-  ];
-
-  const [nome, setNome] = useState("");
-  const [cargo, setCargo] = useState("");
-  const [imagem, setImagem] = useState("");
-  const [time, setTime] = useState("");
+export const Form = ({ onRegisteredCollaborators, teams }) => {
+  const [name, setName] = useState("");
+  const [role, setRole] = useState("");
+  const [image, setImage] = useState("");
+  const [team, setTeam] = useState("");
 
   function onSave(e) {
     e.preventDefault();
-    console.log("itens enviado => ", nome, cargo, imagem, time);
+    onRegisteredCollaborators({ name, role, image, team });
+    setName("");
+    setRole("");
+    setImage("");
+    setTeam("");
   }
 
   return (
@@ -31,34 +25,34 @@ export const Form = () => {
         <h2>Preencha os dados para criar o card do colaborador:</h2>
         <Inputs
           label="Nome"
-          value={nome}
-          onChanged={value => setNome(value)}
+          value={name}
+          onChanged={value => setName(value)}
           required={true}
           type="text"
           placeholder="nome"
         />
         <Inputs
           label="Cargo"
-          value={cargo}
-          onChanged={value => setCargo(value)}
+          value={role}
+          onChanged={value => setRole(value)}
           required={true}
           type="text"
           placeholder="cargo"
         />
         <Inputs
           label="Imagem"
-          value={imagem}
-          onChanged={value => setImagem(value)}
+          value={image}
+          onChanged={value => setImage(value)}
           required={true}
           type="text"
           placeholder="imagem"
         />
         <Select
           label="Time"
-          value={time}
-          onChanged={value => setTime(value)}
+          value={team}
+          onChanged={value => setTeam(value)}
           required={true}
-          itens={times}
+          itens={teams}
         />
         <Botao>Enviar card</Botao>
       </form>
