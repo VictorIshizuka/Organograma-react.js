@@ -1,4 +1,4 @@
-deploy:[organograma-react-js.vercel.app]
+# deploy:[organograma-react-js.vercel.app]
 
 In the project directory, you can run:
 
