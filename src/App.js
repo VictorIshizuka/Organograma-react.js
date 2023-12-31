@@ -61,6 +61,12 @@ function App() {
     );
   }
 
+  function onDeleteCollaborator(id) {
+    setCollaborators(
+      collaborators.filter(collaborators => collaborators.id !== id)
+    );
+  }
+
   return (
     <div className="App">
       <Banner />
@@ -75,6 +81,7 @@ function App() {
           changeColor={changeColorTeam}
           key={team.name}
           id={team.id}
+          onDelete={onDeleteCollaborator}
           nameTeam={team.name}
           colorPrimary={team.colorPrimary}
           collaborators={collaborators.filter(

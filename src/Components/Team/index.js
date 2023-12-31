@@ -8,6 +8,7 @@ export const Team = ({
   colorPrimary,
   collaborators,
   changeColor,
+  onDelete,
 }) => {
   return (
     collaborators.length > 0 && (
@@ -29,10 +30,12 @@ export const Team = ({
             return (
               <Collaborator
                 key={collaborator.name}
+                id={collaborator.id}
                 colorPrimary={colorPrimary}
                 image={collaborator.image}
                 name={collaborator.name}
                 role={collaborator.role}
+                onDelete={onDelete}
               />
             );
           })}
