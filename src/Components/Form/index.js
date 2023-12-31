@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Botao } from "./Botao";
+import { Button } from "./Button";
 import "./Form.css";
 import { Inputs } from "./Inputs";
 import { Select } from "./Select";
+import { v4 as uuidv4 } from "uuid";
 
 export const Form = ({ onRegisteredCollaborators, teams }) => {
   const [name, setName] = useState("");
@@ -12,7 +13,7 @@ export const Form = ({ onRegisteredCollaborators, teams }) => {
 
   function onSave(e) {
     e.preventDefault();
-    onRegisteredCollaborators({ name, role, image, team });
+    onRegisteredCollaborators({ id: uuidv4(), name, role, image, team });
     setName("");
     setRole("");
     setImage("");
@@ -54,7 +55,7 @@ export const Form = ({ onRegisteredCollaborators, teams }) => {
           required={true}
           itens={teams}
         />
-        <Botao>Enviar card</Botao>
+        <Button>Enviar card</Button>
       </form>
     </section>
   );
