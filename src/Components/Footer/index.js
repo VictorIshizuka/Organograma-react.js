@@ -2,7 +2,7 @@ import "./Footer.css";
 
 export const Footer = () => {
   return (
-    <footer className="footer">
+    <footer>
       <div className="social-media">
         <img src="./images/fb.png" alt="facebook" />
         <img src="./images/ig.png" alt="instagram" />
