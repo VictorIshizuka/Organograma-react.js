@@ -1,9 +1,9 @@
 import "./Collaborator.css";
 
-export const Collaborator = ({ image, name, role, colorPrimary }) => {
+export const Collaborator = ({ image, name, role, color }) => {
   return (
     <div className="collaborator">
-      <div className="header" style={{ backgroundColor: colorPrimary }}>
+      <div className="header" style={{ backgroundColor: color }}>
         <img src={image} alt={name} />
       </div>
       <div className="footer">

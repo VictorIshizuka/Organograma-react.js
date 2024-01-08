@@ -2,34 +2,26 @@ import hexToRgba from "hex-to-rgba";
 import { Collaborator } from "../Collaborator";
 import "./Team.css";
 
-export const Team = ({
-  nameTeam,
-  id,
-  colorPrimary,
-  collaborators,
-  changeColor,
-}) => {
+export const Team = ({ nameTeam, id, color, collaborators, changeColor }) => {
   return (
     collaborators.length > 0 && (
       <section
         className="team"
-        style={{ backgroundColor: hexToRgba(colorPrimary, 0.5) }}
+        style={{ backgroundColor: hexToRgba(color, 0.5) }}
       >
         <input
           type="color"
-          value={colorPrimary}
+          value={color}
           onChange={e => changeColor(e.target.value, id)}
           className="input-color"
         />
-        <h3 style={{ borderBottom: `4px solid ${colorPrimary}` }}>
-          {nameTeam}
-        </h3>
+        <h3 style={{ borderBottom: `4px solid ${color}` }}>{nameTeam}</h3>
         <div className="collaborators">
           {collaborators.map(collaborator => {
             return (
               <Collaborator
                 key={collaborator.name}
-                colorPrimary={colorPrimary}
+                color={color}
                 image={collaborator.image}
                 name={collaborator.name}
                 role={collaborator.role}

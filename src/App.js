@@ -1,46 +1,47 @@
 import { useState } from "react";
 import { Banner } from "./Components/Banner";
 import { Footer } from "./Components/Footer";
-import { Form } from "./Components/Form";
+import { Form } from "./Components/Form/FormCollaborator";
 import { Team } from "./Components/Team";
 import { v4 as uuidv4 } from "uuid";
+import { FormTeam } from "./Components/Form/FormTeam";
 
 function App() {
   const [teams, setTeams] = useState([
     {
       id: uuidv4(),
       name: "Programação",
-      colorPrimary: "#57C278",
+      color: "#57C278",
     },
     {
       id: uuidv4(),
       name: "Front-End",
-      colorPrimary: "#82CFFA",
+      color: "#82CFFA",
     },
     {
       id: uuidv4(),
       name: "Data Sciense",
-      colorPrimary: "#A6D157",
+      color: "#A6D157",
     },
     {
       id: uuidv4(),
       name: "Devops",
-      colorPrimary: "#E06B69",
+      color: "#E06B69",
     },
     {
       id: uuidv4(),
       name: "UX e Design",
-      colorPrimary: "#D86EBF",
+      color: "#D86EBF",
     },
     {
       id: uuidv4(),
       name: "Mobile",
-      colorPrimary: "#FEBA05",
+      color: "#FEBA05",
     },
     {
       id: uuidv4(),
       name: "Inovação e Gestão",
-      colorPrimary: "#FF8A29",
+      color: "#FF8A29",
     },
   ]);
 
@@ -54,11 +55,15 @@ function App() {
     setTeams(
       teams.map(team => {
         if (team.id === id) {
-          team.colorPrimary = color;
+          team.color = color;
         }
         return team;
       })
     );
+  }
+
+  function registerTeam(newTeam) {
+    setTeams([...teams, { ...newTeam }]);
   }
 
   return (
@@ -70,13 +75,14 @@ function App() {
           onNewCollaboratorAdd(collaborator)
         }
       />
+      <FormTeam registerTeam={registerTeam} />
       {teams.map(team => (
         <Team
           changeColor={changeColorTeam}
           key={team.name}
           id={team.id}
           nameTeam={team.name}
-          colorPrimary={team.colorPrimary}
+          color={team.color}
           collaborators={collaborators.filter(
             collaborator => collaborator.team === team.name
           )}
