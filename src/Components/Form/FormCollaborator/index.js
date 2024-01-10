@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Button } from "./Button";
+import { Button } from "../../../common/Form/Button";
 import "./Form.css";
-import { Inputs } from "./Inputs";
-import { Select } from "./Select";
+import { Inputs } from "../../../common/Form/Input";
+import { Select } from "../Select";
 import { v4 as uuidv4 } from "uuid";
 
 export const Form = ({ onRegisteredCollaborators, teams }) => {
@@ -30,7 +30,7 @@ export const Form = ({ onRegisteredCollaborators, teams }) => {
           onChanged={value => setName(value)}
           required={true}
           type="text"
-          placeholder="nome"
+          placeholder="Nome"
         />
         <Inputs
           label="Cargo"
@@ -38,7 +38,7 @@ export const Form = ({ onRegisteredCollaborators, teams }) => {
           onChanged={value => setRole(value)}
           required={true}
           type="text"
-          placeholder="cargo"
+          placeholder="Cargo"
         />
         <Inputs
           label="Imagem"
@@ -46,7 +46,7 @@ export const Form = ({ onRegisteredCollaborators, teams }) => {
           onChanged={value => setImage(value)}
           required={true}
           type="text"
-          placeholder="imagem"
+          placeholder="Imagem"
         />
         <Select
           label="Time"
