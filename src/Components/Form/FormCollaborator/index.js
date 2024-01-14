@@ -13,7 +13,7 @@ export const Form = ({ onRegisteredCollaborators, teams }) => {
 
   function onSave(e) {
     e.preventDefault();
-    onRegisteredCollaborators({ id: uuidv4(), name, role, image, team });
+    onRegisteredCollaborators({ id: uuidv4(), name, role, image, team, favorite:false });
     setName("");
     setRole("");
     setImage("");

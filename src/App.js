@@ -68,10 +68,22 @@ function App() {
       collaborators.filter(collaborators => collaborators.id !== id)
     );
     }
+  
   function registerTeam(newTeam) {
     setTeams([...teams, { ...newTeam }]);
 
   }
+
+  function solveFavorite(id){
+    setCollaborators(collaborators.map(collaborator => {
+      if(collaborator.id === id) collaborator.favorite = !collaborator.favorite;
+      console.log( collaborator.favorite)
+      return collaborator;
+    }))
+  }
+    
+ 
+  
 
   return (
     <div className="App">
@@ -94,6 +106,8 @@ function App() {
           collaborators={collaborators.filter(
             collaborator => collaborator.team === team.name
           )}
+          onFavorite={solveFavorite}
+          
         />
       ))}
       <Footer />
