@@ -14,9 +14,14 @@ export const Form = ({ teams }) => {
 
   function onSave(e) {
     e.preventDefault();
-    axios.post('http://localhost:3000/collaborators', {
-      id: uuidv4(), name, role, image, team, favorite:false 
-    })
+    axios.post("http://localhost:3000/collaborators", {
+      id: uuidv4(),
+      name,
+      role,
+      image,
+      team,
+      favorite: false,
+    });
     setName("");
     setRole("");
     setImage("");
@@ -30,7 +35,7 @@ export const Form = ({ teams }) => {
         <Inputs
           label="Nome"
           value={name}
-          onChanged={value => setName(value)}
+          onChanged={(value) => setName(value)}
           required={true}
           type="text"
           placeholder="Nome"
@@ -38,7 +43,7 @@ export const Form = ({ teams }) => {
         <Inputs
           label="Cargo"
           value={role}
-          onChanged={value => setRole(value)}
+          onChanged={(value) => setRole(value)}
           required={true}
           type="text"
           placeholder="Cargo"
@@ -46,7 +51,7 @@ export const Form = ({ teams }) => {
         <Inputs
           label="Imagem"
           value={image}
-          onChanged={value => setImage(value)}
+          onChanged={(value) => setImage(value)}
           required={true}
           type="text"
           placeholder="Imagem"
@@ -54,7 +59,7 @@ export const Form = ({ teams }) => {
         <Select
           label="Time"
           value={team}
-          onChanged={value => setTeam(value)}
+          onChanged={(value) => setTeam(value)}
           required={true}
           itens={teams}
         />
