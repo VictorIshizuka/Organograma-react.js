@@ -1,6 +1,6 @@
 deploy: (https://organograma-react-js.vercel.app/)
 
-[deploy:] (https://organograma-react-js.vercel.app/)
+
 
 
 In the project directory, you can run:

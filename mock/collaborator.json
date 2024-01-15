@@ -39,6 +39,30 @@
       "image": "fefg",
       "team": "Front-End",
       "favorite": false
+    },
+    {
+      "id": "f25e012e-ca3c-4e2c-880c-cab4c9519ed0",
+      "name": "d",
+      "role": "sd",
+      "image": "sd",
+      "team": "UX e Design",
+      "favorite": false
+    },
+    {
+      "id": "a3b7a615-f395-44c0-bba2-4658d9b71fc6",
+      "name": "dvd",
+      "role": "dvd",
+      "image": "dvd",
+      "team": "dvdvd",
+      "favorite": false
+    },
+    {
+      "id": "7f0b75d4-5cbd-420b-b331-97116ad72556",
+      "name": "sdfsdf",
+      "role": "fvfv",
+      "image": "fvfv",
+      "team": "bbb",
+      "favorite": false
     }
   ],
   "teams": [
@@ -65,7 +89,7 @@
     {
       "id": "5",
       "name": "UX e Design",
-      "color": "#D86EBF"
+      "color": "#3c393c"
     },
     {
       "id": "6",
@@ -76,6 +100,16 @@
       "id": "7",
       "name": "Inovação e Gestão",
       "color": "#FF8A29"
+    },
+    {
+      "id": "a05b",
+      "name": "dvdvd",
+      "color": "#ff0000"
+    },
+    {
+      "id": "af78",
+      "name": "bbb",
+      "color": "#395c0f"
     }
   ]
 }
