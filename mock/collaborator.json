@@ -1,0 +1,81 @@
+{
+  "collaborators": [
+    {
+      "id": "b16444c8-5693-458c-ba41-adb11a31ea61",
+      "name": "t",
+      "role": "t",
+      "image": "t",
+      "team": "Programação",
+      "favorite": false
+    },
+    {
+      "id": "f1606062-b3ca-4d63-93d6-a33b8ccdd921",
+      "name": "jj",
+      "role": "hjh",
+      "image": "u",
+      "team": "Mobile",
+      "favorite": false
+    },
+    {
+      "id": "4a2eaeb3-fa7c-4d49-966b-cf00f27efda6",
+      "name": "d",
+      "role": "d",
+      "image": "d",
+      "team": "Programação",
+      "favorite": false
+    },
+    {
+      "id": "1a4275af-78f8-4b9d-81a2-f96081992fdb",
+      "name": "gg",
+      "role": "gg",
+      "image": "dd",
+      "team": "Mobile",
+      "favorite": false
+    },
+    {
+      "id": "54d5d667-3716-4cfe-973c-b312686d9c06",
+      "name": "egrerg",
+      "role": "erger",
+      "image": "fefg",
+      "team": "Front-End",
+      "favorite": false
+    }
+  ],
+  "teams": [
+    {
+      "id": "1",
+      "name": "Programação",
+      "color": "#57C278"
+    },
+    {
+      "id": "2",
+      "name": "Front-End",
+      "color": "#82CFFA"
+    },
+    {
+      "id": "3",
+      "name": "Data Sciense",
+      "color": "#A6D157"
+    },
+    {
+      "id": "4",
+      "name": "Devops",
+      "color": "#E06B69"
+    },
+    {
+      "id": "5",
+      "name": "UX e Design",
+      "color": "#D86EBF"
+    },
+    {
+      "id": "6",
+      "name": "Mobile",
+      "color": "#FEBA05"
+    },
+    {
+      "id": "7",
+      "name": "Inovação e Gestão",
+      "color": "#FF8A29"
+    }
+  ]
+}

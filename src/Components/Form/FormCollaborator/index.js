@@ -4,8 +4,9 @@ import "./Form.css";
 import { Inputs } from "../../../common/Form/Input";
 import { Select } from "../Select";
 import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
 
-export const Form = ({ onRegisteredCollaborators, teams }) => {
+export const Form = ({ teams }) => {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [image, setImage] = useState("");
@@ -13,7 +14,9 @@ export const Form = ({ onRegisteredCollaborators, teams }) => {
 
   function onSave(e) {
     e.preventDefault();
-    onRegisteredCollaborators({ id: uuidv4(), name, role, image, team, favorite:false });
+    axios.post('http://localhost:3000/collaborators', {
+      id: uuidv4(), name, role, image, team, favorite:false 
+    })
     setName("");
     setRole("");
     setImage("");

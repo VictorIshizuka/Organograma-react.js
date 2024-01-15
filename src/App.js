@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Banner } from "./Components/Banner";
 import { Footer } from "./Components/Footer";
 import { Form } from "./Components/Form/FormCollaborator";
 import { Team } from "./Components/Team";
 import { v4 as uuidv4 } from "uuid";
 import { FormTeam } from "./Components/Form/FormTeam";
+import axios from "axios";
 
 function App() {
   const [teams, setTeams] = useState([
@@ -47,6 +48,15 @@ function App() {
 
   const [collaborators, setCollaborators] = useState([]);
 
+  useEffect(()=> {
+   axios.get('http://localhost:3000/collaborators')
+    .then(res => res.data)
+    .then(datas => {
+      setCollaborators(datas)
+    })
+  },[collaborators])
+
+
   const onNewCollaboratorAdd = collaborator => {
     setCollaborators([...collaborators, collaborator]);
   };
@@ -64,9 +74,14 @@ function App() {
 
 
   function onDeleteCollaborator(id) {
-    setCollaborators(
-      collaborators.filter(collaborators => collaborators.id !== id)
-    );
+    axios.delete(`http://localhost:3000/collaborators/${id}`)
+    .then(() => {
+      setCollaborators(
+        collaborators.filter(collaborators => collaborators.id !== id)
+      );
+  
+  })
+    
     }
   
   function registerTeam(newTeam) {
@@ -75,11 +90,24 @@ function App() {
   }
 
   function solveFavorite(id){
-    setCollaborators(collaborators.map(collaborator => {
-      if(collaborator.id === id) collaborator.favorite = !collaborator.favorite;
-      console.log( collaborator.favorite)
-      return collaborator;
-    }))
+      setCollaborators(collaborators.map(collaborator => {
+     if(collaborator.id === id) { 
+      let favoriteOn = collaborator.favorite = !collaborator.favorite
+       collaborator.favorite = !collaborator.favorite
+      
+       axios.put(`http://localhost:3000/collaborators/${id}` , {
+        id: uuidv4(),
+        name: collaborator.name,
+        role: collaborator.role, 
+        image: collaborator.image, 
+        team: collaborator.team, 
+        favorite:favoriteOn
+      })
+      }
+     
+       
+        return collaborator;
+  }))
   }
     
  
