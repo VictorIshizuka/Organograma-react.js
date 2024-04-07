@@ -15,3 +15,8 @@
   margin-top: 32px;
   flex-wrap: wrap;
 }
+
+.input-color {
+  position: absolute;
+  right: 50px;
+}

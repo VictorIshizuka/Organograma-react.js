@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { Botao } from "./Botao";
+import { Button } from "../../../common/Form/Button";
 import "./Form.css";
-import { Inputs } from "./Inputs";
-import { Select } from "./Select";
+import { Inputs } from "../../../common/Form/Input";
+import { Select } from "../Select";
+import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
 
-export const Form = ({ onRegisteredCollaborators, teams }) => {
+export const Form = ({ teams }) => {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [image, setImage] = useState("");
@@ -12,7 +14,14 @@ export const Form = ({ onRegisteredCollaborators, teams }) => {
 
   function onSave(e) {
     e.preventDefault();
-    onRegisteredCollaborators({ name, role, image, team });
+    axios.post("http://localhost:3000/collaborators", {
+      id: uuidv4(),
+      name,
+      role,
+      image,
+      team,
+      favorite: false,
+    });
     setName("");
     setRole("");
     setImage("");
@@ -26,35 +35,35 @@ export const Form = ({ onRegisteredCollaborators, teams }) => {
         <Inputs
           label="Nome"
           value={name}
-          onChanged={value => setName(value)}
+          onChanged={(value) => setName(value)}
           required={true}
           type="text"
-          placeholder="nome"
+          placeholder="Nome"
         />
         <Inputs
           label="Cargo"
           value={role}
-          onChanged={value => setRole(value)}
+          onChanged={(value) => setRole(value)}
           required={true}
           type="text"
-          placeholder="cargo"
+          placeholder="Cargo"
         />
         <Inputs
           label="Imagem"
           value={image}
-          onChanged={value => setImage(value)}
+          onChanged={(value) => setImage(value)}
           required={true}
           type="text"
-          placeholder="imagem"
+          placeholder="Imagem"
         />
         <Select
           label="Time"
           value={team}
-          onChanged={value => setTeam(value)}
+          onChanged={(value) => setTeam(value)}
           required={true}
           itens={teams}
         />
-        <Botao>Enviar card</Botao>
+        <Button>Enviar card</Button>
       </form>
     </section>
   );

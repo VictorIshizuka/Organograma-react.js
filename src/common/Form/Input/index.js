@@ -1,4 +1,4 @@
-import "./Inputs.css";
+import "./Input.css";
 export const Inputs = ({
   label,
   type,
@@ -10,7 +10,7 @@ export const Inputs = ({
   const OnTyped = e => onChanged(e.target.value);
 
   return (
-    <div className="input">
+    <div className={`field field-${type}`}>
       <label>{label}</label>
       <input
         type={type}

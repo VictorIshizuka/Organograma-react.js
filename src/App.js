@@ -1,76 +1,114 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Banner } from "./Components/Banner";
 import { Footer } from "./Components/Footer";
-import { Form } from "./Components/Form";
+import { Form } from "./Components/Form/FormCollaborator";
 import { Team } from "./Components/Team";
+import { v4 as uuidv4 } from "uuid";
+import { FormTeam } from "./Components/Form/FormTeam";
+import axios from "axios";
 
 function App() {
-  const teams = [
-    {
-      name: "Programação",
-      colorPrimary: "#57C278",
-      colorSecondary: "#D9F7E9",
-    },
-    {
-      name: "Front-End",
-      colorPrimary: "#82CFFA",
-      colorSecondary: "#E8F8FF",
-    },
-    {
-      name: "Data Sciense",
-      colorPrimary: "#A6D157",
-      colorSecondary: "#F0F8E2",
-    },
-    {
-      name: "Devops",
-      colorPrimary: "#E06B69",
-      colorSecondary: "#FDE7E8",
-    },
-    {
-      name: "UX e Design",
-      colorPrimary: "#D86EBF",
-      colorSecondary: "#FAE5F5",
-    },
-    {
-      name: "Mobile",
-      colorPrimary: "#FEBA05",
-      colorSecondary: "#FFF5D9",
-    },
-    {
-      name: "Inovação e Gestão",
-      colorPrimary: "#FF8A29",
-      colorSecondary: "#FFEEDF",
-    },
-  ];
+  const [teams, setTeams] = useState([]);
 
   const [collaborators, setCollaborators] = useState([]);
 
-  const onNewCollaboratorAdd = collaborator => {
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/collaborators")
+      .then((res) => res.data)
+      .then((datas) => {
+        setCollaborators(datas);
+      });
+  }, [collaborators]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/teams")
+      .then((res) => res.data)
+      .then((datas) => {
+        setTeams(datas);
+      });
+  }, [teams]);
+
+  const onNewCollaboratorAdd = (collaborator) => {
     setCollaborators([...collaborators, collaborator]);
   };
+
+  function changeColorTeam(color, id) {
+    setTeams(
+      teams.map((team) => {
+        if (team.id === id) {
+          team.color = color;
+          axios.put(`http://localhost:3000/teams/${id}`, {
+            id: uuidv4(),
+            name: team.name,
+            color: team.color,
+          });
+        }
+        return team;
+      })
+    );
+  }
+
+  function onDeleteCollaborator(id) {
+    axios.delete(`http://localhost:3000/collaborators/${id}`).then(() => {
+      setCollaborators(
+        collaborators.filter((collaborators) => collaborators.id !== id)
+      );
+    });
+  }
+
+  function registerTeam(newTeam) {
+    setTeams([...teams, { ...newTeam }]);
+  }
+
+  function solveFavorite(id) {
+    setCollaborators(
+      collaborators.map((collaborator) => {
+        if (collaborator.id === id) {
+          let favoriteOn = (collaborator.favorite = !collaborator.favorite);
+          collaborator.favorite = !collaborator.favorite;
+
+          axios.put(`http://localhost:3000/collaborators/${id}`, {
+            id: uuidv4(),
+            name: collaborator.name,
+            role: collaborator.role,
+            image: collaborator.image,
+            team: collaborator.team,
+            favorite: favoriteOn,
+          });
+        }
+
+        return collaborator;
+      })
+    );
+  }
 
   return (
     <div className="App">
       <Banner />
       <Form
-        teams={teams.map(team => team.name)}
-        onRegisteredCollaborators={collaborator =>
+        teams={teams.map((team) => team.name)}
+        onRegisteredCollaborators={(collaborator) =>
           onNewCollaboratorAdd(collaborator)
         }
       />
-      {teams.map(team => (
+      <FormTeam registerTeam={registerTeam} />
+      {teams.map((team) => (
         <Team
+          changeColor={changeColorTeam}
           key={team.name}
+          id={team.id}
+          onDelete={onDeleteCollaborator}
           nameTeam={team.name}
-          colorPrimary={team.colorPrimary}
-          colorSecondary={team.colorSecondary}
+          color={team.color}
           collaborators={collaborators.filter(
-            collaborator => collaborator.team === team.name
+            (collaborator) => collaborator.team === team.name
           )}
+          onFavorite={solveFavorite}
         />
       ))}
       <Footer />
-
     </div>
   );
 }
