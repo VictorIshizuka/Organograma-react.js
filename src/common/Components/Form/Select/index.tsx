@@ -1,11 +1,23 @@
 import "./Select.css";
 
-export const Select = ({ label, itens, required, value, onChanged }) => {
+export const Select = ({
+  label,
+  itens,
+  required,
+  value,
+  onChange,
+}: {
+  label?: string;
+  itens: string[];
+  required?: boolean;
+  value?: string;
+  onChange: (value: string) => void;
+}) => {
   return (
     <div className="select">
       <label>{label}</label>
       <select
-        onChange={e => onChanged(e.target.value)}
+        onChange={e => onChange(e.target.value)}
         required={required}
         value={value}
       >

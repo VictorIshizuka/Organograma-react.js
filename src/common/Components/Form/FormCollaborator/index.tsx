@@ -1,20 +1,24 @@
-import { useState } from "react";
-import { Button } from "../../../common/Form/Button";
-import "./Form.css";
-import { Inputs } from "../../../common/Form/Input";
-import { Select } from "../Select";
 import { v4 as uuidv4 } from "uuid";
-import axios from "axios";
+import { useState } from "react";
+import { Input } from "../Input";
+import { Button } from "../Button";
+import { Select } from "../Select";
+import { ICollaborator } from "../../../interfaces/Collaborator";
 
-export const Form = ({ teams }) => {
+interface ITeams {
+  teams: string[];
+  onRegisteredCollaborators: (e: ICollaborator) => void;
+}
+
+export const Form = ({ teams, onRegisteredCollaborators }: ITeams) => {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [image, setImage] = useState("");
   const [team, setTeam] = useState("");
 
-  function onSave(e) {
+  function onSave(e: React.FormEvent<HTMLElement>) {
     e.preventDefault();
-    axios.post("http://localhost:3000/collaborators", {
+    onRegisteredCollaborators({
       id: uuidv4(),
       name,
       role,
@@ -32,26 +36,26 @@ export const Form = ({ teams }) => {
     <section className="form">
       <form onSubmit={onSave}>
         <h2>Preencha os dados para criar o card do colaborador:</h2>
-        <Inputs
+        <Input
           label="Nome"
           value={name}
-          onChanged={(value) => setName(value)}
+          onChange={value => setName(value)}
           required={true}
           type="text"
           placeholder="Nome"
         />
-        <Inputs
+        <Input
           label="Cargo"
           value={role}
-          onChanged={(value) => setRole(value)}
+          onChange={value => setRole(value)}
           required={true}
           type="text"
           placeholder="Cargo"
         />
-        <Inputs
+        <Input
           label="Imagem"
           value={image}
-          onChanged={(value) => setImage(value)}
+          onChange={value => setImage(value)}
           required={true}
           type="text"
           placeholder="Imagem"
@@ -59,7 +63,7 @@ export const Form = ({ teams }) => {
         <Select
           label="Time"
           value={team}
-          onChanged={(value) => setTeam(value)}
+          onChange={(value: string) => setTeam(value)}
           required={true}
           itens={teams}
         />
