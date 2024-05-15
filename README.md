@@ -1,9 +1,9 @@
-deploy: (https://organograma-react-js.vercel.app/)
+
 
 
 ## Melhorias
 
--- Migrar para o vite com typescprit;\
+-- Migrar para o vite com typescprit;
 
 ## Refatorar o código e adicionar funcionalidades
 
@@ -12,7 +12,7 @@ deploy: (https://organograma-react-js.vercel.app/)
 -- adicionar validações de campo;\
 -- sanitizar dados nos formulários e/ou lista;\
 -- opção de omitir os formulários;\
--- mudar o armazenamentos de dados em caso de deploy ou criar um banco para tal;\
+-- mudar o armazenamentos de dados em caso de deploy ou criar um banco para tal;
 
 
 ## Problema com a persistencia de dados  do json
