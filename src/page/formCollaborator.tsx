@@ -1,16 +1,14 @@
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
-import { Input } from "../Input";
-import { Button } from "../Button";
-import { Select } from "../Select";
-import { ICollaborator } from "../../../interfaces/Collaborator";
+import { useCollaborators } from "../common/context/useContextCollaborator";
+import { Input } from "../common/Components/Form/Input";
+import { Select } from "../common/Components/Form/Select";
+import { Button } from "../common/Components/Form/Button";
+import "../page/style/FormCollaborator.css";
 
-interface ITeams {
-  teams: string[];
-  onRegisteredCollaborators: (e: ICollaborator) => void;
-}
+export const FormCollaborator = () => {
+  const { teams, createCollaborator } = useCollaborators();
 
-export const Form = ({ teams, onRegisteredCollaborators }: ITeams) => {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [image, setImage] = useState("");
@@ -18,7 +16,7 @@ export const Form = ({ teams, onRegisteredCollaborators }: ITeams) => {
 
   function onSave(e: React.FormEvent<HTMLElement>) {
     e.preventDefault();
-    onRegisteredCollaborators({
+    createCollaborator({
       id: uuidv4(),
       name,
       role,

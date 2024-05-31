@@ -5,7 +5,4 @@ export interface ITeam {
   id: string;
   color: string;
   collaborators?: ICollaborator[];
-  changeColor?: (e: string, id: string) => void;
-  onDelete?: (e: string) => void;
-  onFavorite?: (e: string) => void;
 }

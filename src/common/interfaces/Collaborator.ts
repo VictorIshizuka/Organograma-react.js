@@ -11,8 +11,6 @@ export interface ICollaboratorFunction {
   image: string;
   name: string;
   role: string;
-  backgroundColor?: string;
-  onDelete: (e: string) => void;
-  onFavorite: (e: string) => void;
+  backgroundColor: string;
   collaborator: ICollaborator;
 }

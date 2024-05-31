@@ -1,25 +1,26 @@
-deploy: (https://organograma-react-js.vercel.app/)
+
 
 
 ## Melhorias
 
 -- Migrar para o vite com typescprit;\
+-- Gerenciador de estado;
 
 ## Refatorar o código e adicionar funcionalidades
 
--- adicionar um gerenciador de estado;\
+
 -- usar react-hook-form é opicional;\
--- adicionar validações de campo;\
+-- adicionar validações de campo personalizado;\
 -- sanitizar dados nos formulários e/ou lista;\
 -- opção de omitir os formulários;\
--- mudar o armazenamentos de dados em caso de deploy ou criar um banco para tal;\
+-- mudar o armazenamentos de dados em caso de deploy ou criar um banco para tal;
 
 
 ## Problema com a persistencia de dados  do json
  -- A vercel ate então pode listar os dados, mas se torna incapaz de criar ou alterar algum dado;\
  -- Mesmo que crie um arquivo node com o json e realize o deploy de ambas aplicações ainda sim se trona inviavel;\
  -- Criar um banco de dados para uma aplicação como essa de estudo pode se tornar desnecessário;\
- -- outra opção é mockar os dados usando os metodos conhecidos para adicionar, listar ou remover um dado dentro do array;\
+ -- outra opção é mockar os dados usando os metodos conhecidos para adicionar, listar ou remover um dado dentro do array;
 
 
 # React + TypeScript + Vite

@@ -1,6 +1,11 @@
 import "./Footer.css";
 
-export const Footer = () => {
+interface IFooter {
+  src: string;
+  alt: string;
+}
+
+export const Footer = ({ src, alt }: IFooter) => {
   return (
     <footer>
       <div className="social-media">
@@ -9,7 +14,7 @@ export const Footer = () => {
         <img src="./images/tw.png" alt="twitter" />
       </div>
       <div className="logo">
-        <img src="./images/logo.png" alt="" />
+        <img src={src} alt={alt} />
       </div>
       <div className="copyright">
         <h4>Desenvolvido por Victor</h4>

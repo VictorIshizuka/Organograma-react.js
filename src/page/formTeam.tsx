@@ -1,26 +1,21 @@
-import "./FormTeam.css";
-import { v4 as uuidv4 } from "uuid";
+import "../page/style/FormTeam.css";
+import { v4 as uuid4 } from "uuid";
 import { useState } from "react";
+import { useCollaborators } from "../common/context/useContextCollaborator";
+import { Input } from "../common/Components/Form/Input";
+import { Button } from "../common/Components/Form/Button";
 
-import { Input } from "../Input";
-import { Button } from "../Button";
-import { ITeamRegister } from "../../Team";
-
-interface IForm {
-  registerTeam: (e: ITeamRegister) => void;
-}
-
-export const FormTeam = ({ registerTeam }: IForm) => {
+export const FormTeam = () => {
+  const { createTeams } = useCollaborators();
   const [name, setNameTeam] = useState<string>();
   const [colorTeam, setColorTeam] = useState<string>();
 
   const salveTeam = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    registerTeam({
-      id: uuidv4(),
-      name: name,
+    createTeams({
+      id: uuid4(),
       color: colorTeam,
+      name: name,
     });
 
     setNameTeam("");
