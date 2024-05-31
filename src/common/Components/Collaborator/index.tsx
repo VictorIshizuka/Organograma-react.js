@@ -1,22 +1,24 @@
 import "./Collaborator.css";
 import { Button } from ".././Form/Button";
 import { ICollaboratorFunction } from "../../interfaces/Collaborator";
+import { useCollaborators } from "../../context/useContextCollaborator";
 
 export const Collaborator = ({
   image,
   name,
   role,
-  onDelete,
-  onFavorite,
   collaborator,
 }: ICollaboratorFunction) => {
+  const { UpdateFavoriteCollaborator, deleteCollaborator } = useCollaborators();
   function onFavorited() {
-    onFavorite(collaborator.id);
+    UpdateFavoriteCollaborator(collaborator.id);
   }
   return (
     <div className="collaborator">
       <div className="header" style={{ backgroundColor: collaborator.color }}>
-        <Button onClick={() => onDelete(collaborator.id)}>deletar</Button>
+        <Button onClick={() => deleteCollaborator(collaborator.id)}>
+          deletar
+        </Button>
         <img src={image} alt={name} />
       </div>
       <div className="footer">

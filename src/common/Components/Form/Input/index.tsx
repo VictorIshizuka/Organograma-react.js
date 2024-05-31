@@ -5,7 +5,7 @@ interface Input {
   type: string;
   placeholder: string;
   required?: boolean;
-  value: string | undefined;
+  value?: string;
   onChange: (e: string) => void;
 }
 
@@ -17,18 +17,13 @@ export const Input = ({
   value,
   onChange,
 }: Input) => {
-  const OnTyped = (e: React.FormEvent<HTMLInputElement>) => {
-    const newValue = e.currentTarget.value;
-    onChange(newValue);
-  };
-
   return (
     <div className={`field field-${type}`}>
       <label>{label}</label>
       <input
         type={type}
         value={value}
-        onChange={OnTyped}
+        onChange={e => onChange(e.target.value)}
         required={required}
         placeholder={placeholder}
       />
