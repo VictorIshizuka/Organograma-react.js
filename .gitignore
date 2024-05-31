@@ -30,9 +30,8 @@ yarn-error.log*
 !.vscode/tasks.jsons
 !.vscode/launch.json
 !.vscode/extensions.json
-!.vscode/mock/collaborator.json
+
 
 # Environment
-.env*
-!.env
+.env
 !.env.test
