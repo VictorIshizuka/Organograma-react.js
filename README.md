@@ -2,13 +2,13 @@
 
 
 ## Melhorias
-
 -- Migrar para o vite com typescprit;\
 -- Gerenciador de estado;
 
 ## Refatorar o código e adicionar funcionalidades
 
-
+-- talves tenha um problema no metodo put do colaborador para altenar o favoritar colaborador(resolver renderização);\ 
+-- adicionar um gerenciador de estado;\
 -- usar react-hook-form é opicional;\
 -- adicionar validações de campo personalizado;\
 -- sanitizar dados nos formulários e/ou lista;\
@@ -22,6 +22,12 @@
  -- Criar um banco de dados para uma aplicação como essa de estudo pode se tornar desnecessário;\
  -- outra opção é mockar os dados usando os metodos conhecidos para adicionar, listar ou remover um dado dentro do array;
 
+
+## Para iniciar a aplicação
+
+-- `npm i`
+-- `npm run dev `
+-- `npm run json`
 
 # React + TypeScript + Vite
 
