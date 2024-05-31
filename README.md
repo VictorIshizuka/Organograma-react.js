@@ -7,7 +7,6 @@
 
 ## Refatorar o código e adicionar funcionalidades
 
--- talves tenha um problema no metodo put do colaborador para altenar o favoritar colaborador(resolver renderização);\ 
 -- adicionar um gerenciador de estado;\
 -- usar react-hook-form é opicional;\
 -- adicionar validações de campo personalizado;\
