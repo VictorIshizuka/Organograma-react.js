@@ -1,16 +1,9 @@
-/* eslint-disable react-refresh/only-export-components */
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useCallback, useContext, useState } from "react";
+
+import axios from "axios";
 
 import { ICollaborator } from "../interfaces/Collaborator";
-import axios from "axios";
 import { ITeam } from "../interfaces/Team";
-import { ITeamRegister } from "../Components/Team";
 
 interface ChildrenProps {
   children: React.ReactNode;
@@ -21,136 +14,146 @@ interface IData {
 }
 
 type ICollaboratorFunction = IData & {
+  listCollaborators: () => Promise<void>;
+  listTeams: () => Promise<void>;
   createCollaborator: (collaborator: ICollaborator) => Promise<void>;
   UpdateFavoriteCollaborator: (id: string) => void;
-  deleteCollaborator: (id: string) => Promise<void>;
   changeColorTeam: (color: string, id: string) => void;
-  createTeams: (value: ITeamRegister) => Promise<void>;
+  createTeams: (value: ITeam) => Promise<void>;
+  deleteCollaborator: (id: string) => Promise<void>;
 };
 
 const INITIAL_STATE: IData = { collaborators: [], teams: [] };
 
-export const CollaboratorContext = createContext<ICollaboratorFunction>(
-  INITIAL_STATE as unknown as ICollaboratorFunction
+export const CollaboratorContext = createContext(
+  INITIAL_STATE as ICollaboratorFunction
 );
 
 export const ProviderCollaborator = ({ children }: ChildrenProps) => {
-  const [collaborators, setCollaborators] = useState<ICollaborator[]>([]);
-  const [teams, setTeams] = useState<ITeam[]>([]);
+  const [state, setState] = useState(INITIAL_STATE);
+  const url = "http://localhost:3000";
+
+  const setStateSafety = useCallback(
+    (newData: Partial<IData> | ((newData: IData) => Partial<IData>)) => {
+      setState(oldData => ({
+        ...oldData,
+        ...(typeof newData === "function" ? newData(oldData) : newData),
+      }));
+    },
+    [setState]
+  );
+
+  const listTeams = useCallback(async () => {
+    try {
+      const result = await axios.get<ITeam[]>("http://localhost:3000/teams");
+      setStateSafety({ teams: result.data });
+    } catch (error) {
+      console.error("Erro ao listar times:", error);
+    }
+  }, [setStateSafety]);
+
+  const listCollaborators = useCallback(async () => {
+    const result = await axios.get("http://localhost:3000/collaborators");
+    setStateSafety({ collaborators: result.data });
+  }, [setStateSafety]);
 
   const createCollaborator = useCallback(
     async (collaborator: ICollaborator) => {
       try {
-        await axios.post(`http://localhost:3000/collaborators`, {
-          id: collaborator.id,
-          favorite: collaborator.favorite,
-          name: collaborator.name,
-          role: collaborator.role,
-          image: collaborator.image,
-          team: collaborator.team,
-        });
-        //   setCollaborators([...collaborators, collaborator]);
-      } catch {
-        console.log("Erro ao criar o Colaborador");
+        const result = await axios.post<ICollaborator>(
+          `${url}/collaborators`,
+          collaborator
+        );
+        setStateSafety(oldState => ({
+          collaborators: [...oldState.collaborators, result.data],
+        }));
+      } catch (error) {
+        console.error("Erro ao criar colaborador:", error);
       }
     },
-    []
+    [setStateSafety]
   );
 
   const UpdateFavoriteCollaborator = useCallback(
-    (id: string) => {
-      setCollaborators(
-        collaborators.map(collaborator => {
+    async (id: string) => {
+      try {
+        const updatedCollaborators = state.collaborators.map(collaborator => {
           if (collaborator.id === id) {
-            const favoriteOn = (collaborator.favorite = !collaborator.favorite);
-            collaborator.favorite = !collaborator.favorite;
-            axios.put(`http://localhost:3000/collaborators/${id}`, {
-              name: collaborator.name,
-              role: collaborator.role,
-              image: collaborator.image,
-              team: collaborator.team,
-              favorite: favoriteOn,
-            });
+            return { ...collaborator, favorite: !collaborator.favorite };
           }
           return collaborator;
-        })
-      );
+        });
+
+        await axios.put(`${url}/collaborators/${id}`, {
+          ...updatedCollaborators.find(c => c.id === id),
+        });
+
+        setStateSafety({ collaborators: updatedCollaborators });
+      } catch (error) {
+        console.error("Erro ao atualizar colaborador favorito:", error);
+      }
     },
-    [collaborators]
+    [state.collaborators, setStateSafety]
   );
 
-  const deleteCollaborator = useCallback(async (id: string) => {
-    await axios.delete(`http://localhost:3000/collaborators/${id}`).then(() => {
-      setCollaborators(
-        collaborators.filter(collaborators => collaborators.id !== id)
-      );
-    });
-  }, []);
-
-  const createTeams = useCallback(async (newTeam: ITeamRegister) => {
-    if (
-      teams.find(team => team.name.toLowerCase() === newTeam.name.toLowerCase())
-    ) {
-      alert("Time já registrado!");
-      return;
-    }
-    await axios.post(`http://localhost:3000/teams`, {
-      id: newTeam.id,
-      name: newTeam.name,
-      color: newTeam.color,
-    });
-    setTeams([...teams, { ...newTeam }]);
-  }, []);
+  const createTeams = useCallback(
+    async (newTeam: ITeam) => {
+      if (
+        state.teams.find(
+          team => team.name.toLowerCase() === newTeam.name.toLowerCase()
+        )
+      ) {
+        alert("Time já registrado!");
+        return;
+      }
+      const result = await axios.post(`${url}/teams`, newTeam);
+      setStateSafety(oldTeam => ({
+        teams: [...oldTeam.teams, result.data],
+      }));
+    },
+    [setStateSafety, state.teams]
+  );
 
   const changeColorTeam = useCallback(
     async (color: string, id: string) => {
-      setTeams(
-        teams.map(team => {
+      try {
+        const updatedColorTeam = state.teams.map(team => {
           if (team.id === id) {
-            team.color = color;
-            axios.put(`http://localhost:3000/teams/${id}`, {
-              id: team.id,
-              name: team.name,
-              color: team.color,
-            });
+            return { ...team, color: color };
           }
           return team;
-        })
-      );
+        });
+        await axios.put(`${url}/teams/${id}`, {
+          ...updatedColorTeam.find(c => c.id === id),
+        });
+        setStateSafety({ teams: updatedColorTeam });
+      } catch (error) {
+        console.error("Erro ao atualizar cor do time:", error);
+      }
     },
-    [teams]
+    [setStateSafety, state.teams]
   );
 
-  useEffect(() => {
-    try {
-      axios
-        .get("http://localhost:3000/collaborators")
-        .then(res => res.data)
-        .then(data => {
-          setCollaborators(data);
-        });
-    } catch (erro) {
-      console.log("erro ao lista colaboradores " + erro);
-    }
-  }, [createCollaborator, deleteCollaborator]);
-
-  useEffect(() => {
-    try {
-      axios
-        .get("http://localhost:3000/teams")
-        .then(res => res.data)
-        .then(data => setTeams(data));
-    } catch (erro) {
-      console.log("erro ao listar times " + erro);
-    }
-  }, []);
+  const deleteCollaborator = useCallback(
+    async (id: string) => {
+      try {
+        axios.delete(`${url}/collaborators/${id}`);
+        const newList = state.collaborators.filter(item => item.id !== id);
+        setStateSafety({ collaborators: newList });
+      } catch (error) {
+        console.error("Erro ao deletar colabaorador:", error);
+      }
+    },
+    [setStateSafety, state.collaborators]
+  );
 
   return (
     <CollaboratorContext.Provider
       value={{
+        ...state,
+        listCollaborators,
+        listTeams,
         createCollaborator,
-        teams,
-        collaborators,
         UpdateFavoriteCollaborator,
         deleteCollaborator,
         changeColorTeam,

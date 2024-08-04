@@ -1,9 +1,10 @@
-import { ITeam } from "../../Team";
+import { ITeam } from "../../../interfaces/Team";
+
 import "./Select.css";
 
 interface ISelect {
   label?: string;
-  itens: ITeam[];
+  items: ITeam[];
   required?: boolean;
   value?: string;
   onChange: (value: string) => void;
@@ -11,7 +12,7 @@ interface ISelect {
 
 export const Select = ({
   label,
-  itens,
+  items,
   required,
   value,
   onChange,
@@ -25,7 +26,7 @@ export const Select = ({
         value={value}
       >
         <option value=""></option>
-        {itens.map(item => {
+        {items.map(item => {
           return <option key={item.name}>{item.name}</option>;
         })}
       </select>

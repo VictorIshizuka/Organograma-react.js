@@ -3,7 +3,6 @@ export interface ICollaborator {
   image: string;
   name: string;
   role: string;
-  color?: string;
   favorite?: boolean;
   team: string;
 }

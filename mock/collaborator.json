@@ -10,7 +10,7 @@
     },
     {
       "id": "6275aa18-7506-4034-8ba6-ee734d9f087f",
-      "favorite": false,
+      "favorite": true,
       "name": "Miguel",
       "role": "estudante",
       "image": "https://github.com/Ishizuka13.png",
@@ -21,7 +21,7 @@
     {
       "id": "2",
       "name": "Front-End",
-      "color": "#4092c4"
+      "color": "#3f7292"
     },
     {
       "id": "3",
@@ -49,81 +49,9 @@
       "color": "#a77349"
     },
     {
-      "id": "a05b",
-      "name": "dvdvd",
-      "color": "#ff0000"
-    },
-    {
-      "id": "af78",
-      "name": "bbb",
-      "color": "#395c0f"
-    },
-    {
-      "id": "991389a8-4f7c-4946-9180-e959a4b57cd1",
-      "name": "Victor card",
-      "color": "#ae2929"
-    },
-    {
-      "id": "4855139f-8658-4850-bdbf-95955f235597",
-      "name": "Teste",
-      "color": ""
-    },
-    {
-      "id": "dd3a522f-20e0-4cd0-909c-6315d60d1076",
-      "name": "criado com test e",
-      "color": "#a62121"
-    },
-    {
-      "id": "bf8e5a6b-b8c5-44f8-b0ac-6dd41fa0993d",
-      "name": "tutu",
-      "color": "#b21f1f"
-    },
-    {
-      "id": "a7b0a47f-8d3a-4bbc-acb0-3451b9cd2bde",
-      "name": "asda",
-      "color": "#ad0b0b"
-    },
-    {
-      "id": "f3cd7d5e-17c8-4ad5-abfa-30a64c5d045b",
-      "name": "tetet",
-      "color": "#402386"
-    },
-    {
-      "id": "88b640a4-b608-49ff-89ca-c45fc869ac58",
-      "name": "Welton Santos",
-      "color": "#761e1e"
-    },
-    {
-      "id": "d12e0d25-6377-4f98-9c0a-ffcd2302d275",
-      "name": "Mainy Pissarra"
-    },
-    {
-      "id": "c66e6e8e-8c63-4914-ba13-c62c603df3a1",
-      "name": "Programação"
-    },
-    {
-      "id": "892537bf-ced9-4e15-8e8a-e79b49fb9260",
-      "name": "Frontend",
-      "color": ""
-    },
-    {
-      "id": "adb8a34c-ed87-4884-8775-8b7ae6930952",
-      "name": "test20203",
-      "color": "#8c1818"
-    },
-    {
-      "id": "addd31f3-8286-49a7-94f2-de39f5f3c9df",
-      "name": "sdadfadsasd",
-      "color": "#4c2f2f"
-    },
-    {
-      "id": "8af4f2e2-40af-4599-8012-807cf73e4e5c",
-      "name": "2023",
-      "color": ""
-    },
-    {
-      "id": "d70fdc82-dbe1-4b9f-bf9e-4cef3e95253e",
-      "name": "fgf"
+      "id": "e93cb175-b9a5-4643-97ef-173aff62e996",
+      "color": "#00ff04",
+      "name": "Programação "
     }
   ]
 }

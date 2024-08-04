@@ -7,8 +7,8 @@ import { Button } from "../common/Components/Form/Button";
 
 export const FormTeam = () => {
   const { createTeams } = useCollaborators();
-  const [name, setNameTeam] = useState<string>();
-  const [colorTeam, setColorTeam] = useState<string>();
+  const [name, setNameTeam] = useState<string>("");
+  const [colorTeam, setColorTeam] = useState<string>("");
 
   const salveTeam = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

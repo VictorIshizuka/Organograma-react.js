@@ -1,30 +1,30 @@
-import "./Collaborator.css";
-import { Button } from ".././Form/Button";
-import { ICollaboratorFunction } from "../../interfaces/Collaborator";
 import { useCollaborators } from "../../context/useContextCollaborator";
 
-export const Collaborator = ({
-  image,
-  name,
-  role,
-  collaborator,
-}: ICollaboratorFunction) => {
+import { ICollaborator } from "../../interfaces/Collaborator";
+import { Button } from "../Form/Button";
+
+import "./Collaborator.css";
+
+interface ICollaboratorProps {
+  collaborator: ICollaborator;
+  color: string;
+}
+
+export const Collaborator = ({ color, collaborator }: ICollaboratorProps) => {
   const { UpdateFavoriteCollaborator, deleteCollaborator } = useCollaborators();
-  function onFavorited() {
-    UpdateFavoriteCollaborator(collaborator.id);
-  }
+
   return (
     <div className="collaborator">
-      <div className="header" style={{ backgroundColor: collaborator.color }}>
+      <div className="header" style={{ backgroundColor: color }}>
         <Button onClick={() => deleteCollaborator(collaborator.id)}>
           deletar
         </Button>
-        <img src={image} alt={name} />
+        <img src={collaborator.image} alt={collaborator.name} />
       </div>
       <div className="footer">
-        <h4>{name}</h4>
-        <h5>{role}</h5>
-        <div onClick={onFavorited}>
+        <h4>{collaborator.name}</h4>
+        <h5>{collaborator.role}</h5>
+        <div onClick={() => UpdateFavoriteCollaborator(collaborator.id)}>
           {collaborator.favorite ? "favorito" : "nao favorito"}
         </div>
       </div>

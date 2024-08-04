@@ -11,7 +11,7 @@ export const FormCollaborator = () => {
 
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState("https://github.com/");
   const [team, setTeam] = useState("");
 
   function onSave(e: React.FormEvent<HTMLElement>) {
@@ -26,7 +26,7 @@ export const FormCollaborator = () => {
     });
     setName("");
     setRole("");
-    setImage("");
+    setImage("https://github.com/");
     setTeam("");
   }
 
@@ -51,7 +51,7 @@ export const FormCollaborator = () => {
           placeholder="Cargo"
         />
         <Input
-          label="Imagem"
+          label="Imagem Github (.png)"
           value={image}
           onChange={value => setImage(value)}
           required={true}
@@ -63,7 +63,7 @@ export const FormCollaborator = () => {
           value={team}
           onChange={(value: string) => setTeam(value)}
           required={true}
-          itens={teams}
+          items={teams}
         />
         <Button>Enviar card</Button>
       </form>

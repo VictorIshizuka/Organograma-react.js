@@ -1,20 +1,21 @@
-//import hexToRgba from "hex-to-rgba";
-import { Collaborator } from "../Collaborator";
-import "./Team.css";
+import hexToRgba from "hex-to-rgba";
 
 import { useCollaborators } from "../../context/useContextCollaborator";
+
+import { ITeam } from "../../interfaces/Team";
 import { ICollaborator } from "../../interfaces/Collaborator";
 
-export interface ITeamRegister {
-  id: string;
-  name: string;
-  color: string;
+import { Collaborator } from "../Collaborator";
+
+import "./Team.css";
+
+export const Team = ({
+  team,
+  collaborators_s,
+}: {
+  team: ITeam;
   collaborators_s: ICollaborator[];
-}
-
-export interface ITeam extends ITeamRegister {}
-
-export const Team = ({ name, id, color, collaborators_s }: ITeam) => {
+}) => {
   const { changeColorTeam } = useCollaborators();
 
   return (
@@ -22,29 +23,29 @@ export const Team = ({ name, id, color, collaborators_s }: ITeam) => {
       <section
         className="team"
         style={{
-          backgroundColor: color,
-          // hexToRgba(color, 0.5),
+          backgroundColor: hexToRgba(team.color, 0.5),
         }}
       >
         <input
           type="color"
-          value={color}
+          value={team.color}
           onChange={(e: React.FormEvent<HTMLInputElement>) => {
-            changeColorTeam(e.currentTarget.value, id);
+            changeColorTeam(e.currentTarget.value, team.id);
           }}
           className="input-color"
         />
-        <h3 style={{ borderBottom: `4px solid ${color}` }}>{name}</h3>
+        <h3
+          style={{ borderBottom: `4px solid ${team.color}`, color: team.color }}
+        >
+          {team.name}
+        </h3>
         <div className="collaborators">
           {collaborators_s.map(collaborator => {
             return (
               <Collaborator
                 key={collaborator.id}
-                image={collaborator.image}
-                name={collaborator.name}
-                role={collaborator.role}
                 collaborator={collaborator}
-                backgroundColor={collaborator.color}
+                color={team.color}
               />
             );
           })}
